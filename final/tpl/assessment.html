@@ -1,0 +1,37 @@
+<div id="assessment_topframe" xmlns="http://www.w3.org/1999/html">
+    <table id="assessment_subhead_table">
+        <td id="home_button_cell"><table cellpadding="0px" cellspacing="0px" width="100%"><td class="btn_arrow_left"></td><td class="btn_middle"><span class="unselected_font">Home</span></td><td class="btn_right"></td></table></td><td width="15px"></td>
+        <td id="company_name_cell"><table cellpadding="0px" cellspacing="0px" width="100%"><td class="btn_left"></td><td class="btn_middle"><span id="company_name_button" class="unselected_font"></span></td><td class="btn_right"></td></table></td><td width="15px"></td>
+        <td id="interviewees_cell"><table cellpadding="0px" cellspacing="0px" width="100%"><td class="btn_left"></td><td class="btn_middle"><span id="interviewee_button" class="unselected_font">No Interviewee Selected</span></td><td class="btn_right"></td></table></button></td>
+    </table>
+</div>
+<table id="assessment_table">
+    <td id="assessment_nav">
+        <div id="list"></div>
+    </td>
+    <td id="thumb_seperator">
+        <table id="thumb_table">
+            <tr><td class="thumb_bar"></td><td style="width:28px"></td></tr>
+            <tr><td id="thumb_handle" class="thumb_contract" colspan="2"></td></tr>
+            <tr><td class="thumb_bar"></td><td style="width:28px"></td></tr>
+        </table>
+    </td>
+    <td id="assessment_main"></td>
+</table>
+<div id="assessment_footer">
+    <table id="footer_table" width="100%" cellpadding="0" cellspacing="0">
+        <td width="80%">
+            <table id="completion_bar" cellpadding="0" cellspacing="0">
+                <td class="completion_bar_text" id="completion_bar_text"><%= total_answered %> of <%= total_questions %></td>
+                <td id="completion_bar_base">
+                    <table id="fill_table" cellpadding="0" cellspacing="0">
+                        <td id="completion_bar_fill"><div id="bar_shadow"></div></td>
+                    </table>
+                </td>
+            </table>
+        </td>
+        <td width="20%" id="results_button">
+            <table cellpadding="0px" cellspacing="0px" style="padding-bottom:4px; padding-top:4px" width="100%"><td class="btn_left"></td><td class="btn_middle"><span class="unselected_font">View Results</span></td><td class="btn_arrow_right"></td></table>
+        </td>
+    </table>
+</div>

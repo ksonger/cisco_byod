@@ -1,0 +1,27 @@
+<div>
+    <div class="list_category_inactive" id="head">
+        <table class="accordion_category_table">
+            <td width="50px"><img src="<%= model.image %>" border="0" /><td><%= model.name %></td>
+        </table>
+        <input type="hidden" value="<%= model.id %>" id="category_id"/>
+        <input type="hidden" value="" id="category_range_top"/>
+        <input type="hidden" value="" id="category_range_bottom"/>
+    </div>
+    <div class="categoryListItemContent">
+        <div id="category_details">
+            <table cellpadding="0px" cellspacing="0px" id="category_details_table">
+                <% _(model.questions).each(function(q, index) { %>
+                <tr>
+                    <td id="list_question" class="list_question_inactive">
+                        <%= index+1 %>)&nbsp;&nbsp;<%= q.short_text %>
+                        <input type="hidden" value="<%= q.id %>" id="question_id"/>
+                        <input type="hidden" value="<%= model.id %>" id="category_id"/>
+                        <input type="hidden" value="" id="question_range_top"/>
+                        <input type="hidden" value="" id="question_range_bottom"/>
+                    </td>
+                </tr>
+                <% }); %>
+            </table>
+        </div>
+    </div>
+</div>

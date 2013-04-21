@@ -1,0 +1,24 @@
+<div class="form-left-col">
+    <label>Id:</label>
+    <input id="wineId" name="id" type="text" value="<%= id %>" disabled />
+
+    <label>Name:</label>
+    <input type="text" id="company" name="company" value="<%= company %>" required/>
+
+    <label>Main Contact:</label>
+    <input type="text" id="main_contact" name="main_contact" value="<%= main_contact_fname %>"/>
+
+
+
+    <label>Modified:</label>
+    <input type="text" id="modified" name="modified"  value="<%= modified %>"/>
+
+    <button class="save">Save</button>
+    <button class="delete">Delete</button>
+</div>
+
+<div class="form-right-col">
+    <img height="300" src="../pics/<%= picture %>"/>
+    <label>Notes:</label>
+    <textarea id="notes" name="notes"><%= notes %></textarea>
+</div>

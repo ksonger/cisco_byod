@@ -1,0 +1,16 @@
+
+<div id="results_topframe" xmlns="http://www.w3.org/1999/html">
+    <table id="results_subhead_table">
+        <td id="home_button_cell"><table cellpadding="0px" cellspacing="0px" width="100%"><td class="btn_arrow_left"></td><td class="btn_middle"><span class="unselected_font">Home</span></td><td class="btn_right"></td></table></td><td>&nbsp;</td>
+    </table>
+</div>
+<table id="results_table">
+    <td id="results_nav">
+        <table id="results_list">
+            <% _(sections).each(function(sect) { %>
+                <td class="results_nav_item"><div id="results_nav_item_div" class="results_nav_item_inactive"><table height="100%" width="100%" style="vertical-align:middle"><td><%= sect.name %></td></table><input type="hidden" id="section_id" value="<%= sect.id %>" /></div></td></tr>
+            <% }); %>
+        </table>
+    </td>
+    <td id="results_main"></td>
+</table>

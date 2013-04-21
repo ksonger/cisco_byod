@@ -1,0 +1,21 @@
+<table style="width:100%; top:0px; padding-top:0px; position:relative;" align="right"><td>&nbsp;</td><td id="close_button">X</td><td style="width:5px"></td></table>
+<div id="new_interviewee">
+    <table id="interviewees_table">
+        <td colspan="3" class="section">New Interviewee:</td></tr>
+        <td width="33%" align="center"><input id="first_name" name="first_name" type="text" data-default="First Name" value="First Name" /></td>
+        <td width="33%" align="center"><input id="last_name" name="last_name" type="text" data-default="Last Name" value="Last Name" /></td>
+        <td width="33%" align="center"><input id="job_role" name="job_role" type="text" data-default="Job Role" value="Job Role" /></td></tr>
+        <td colspan="3" class="save_td"><button class="form_save">Save</button></td></tr>
+        <td colspan="3" class="section">Existing Interviewees:</td></tr>
+        <% _(interviewees_list).each(function(user, index) { %>
+            <td width="33%" align="center">
+                <input type="hidden" id="interviewee_id" value="<%= user.id %>" />
+                <button id="interviewee_select_button" class="current_interviewee">
+                    <%= user.fname %> <%= user.lname %> 
+                </button>
+            </td>
+        <% if (index == 2 || index == 5 || index == 8 || index == 11 || index == 14 || index == 17 || index == 20 || index == 23 || index == 26  || index == 29  || index == 32) { %>
+            <tr>
+        <% }}); %>
+    </table>
+</div>

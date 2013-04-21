@@ -1,0 +1,66 @@
+<div id="active_closed_new_div">
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <td id="active_button"><table cellpadding="0px" cellspacing="0px" width="100%"><td class="btn_left"></td><td class="btn_middle"><span id="active_assessments_button" class="unselected_font">Active Assessments</span></td><td class="btn_right"></td></table></td><td width="10px"></td>
+            <td id="closed_button"><table cellpadding="0px" cellspacing="0px" width="100%"><td class="btn_left"></td><td class="btn_middle"><span id="closed_assessments_button" class="unselected_font">Closed Assessments</span></td><td class="btn_right"></td></table></td><td width="10px"></td>
+            <td id="new_button"><table cellpadding="0px" cellspacing="0px" width="100%"><td class="btn_left_selected"></td><td class="btn_middle_selected"><span id="new_assessment_button" class="selected_font">New Assessment</span></td><td class="btn_right_selected"></td></table></td>
+        </table>
+</div>
+
+
+<div id="form_content">
+<table style="width:100%; top:5px; padding-top:10px; position:relative;" align="right"><td>&nbsp;</td><td id="close_button">X</td><td style="width:10px"></td></table>
+<table class="new_form" cellpadding="0px" cellspacing="0px">
+        <td class="section" colspan="3">Assessment:
+        </td></tr><tr>
+        <td>
+            <select id="assessments_select">
+                <option value="none">Select Assessment</option>
+                <% _(assessments).each(function(assess) { %>
+                <option value="<%= assess.id %>"><%= assess.name %></option>
+                <% }); %>
+            </select>
+        </td>
+        </tr>
+
+            <td class="section" colspan="3">
+                Company:
+            </td>
+            </tr>
+            <td>
+                <input id="company_name" name="company_name" type="text" data-default="Company Name" value="Company Name" />
+            </td>
+            <td>
+                <select id="industries_select">
+                    <option value="none">Select Industry</option>
+                    <% _(industries).each(function(ind) { %>
+                    <option value="<%= ind.id %>"><%= ind.name %></option>
+                    <% }); %>
+                </select>
+            </td>
+            <td>
+                <select  id="company_sizes_select">
+                    <option value="none">Select Size</option>
+                    <% _(company_sizes).each(function(cs) { %>
+                    <option value="<%= cs.id %>"><%= cs.size %></option>
+                    <% }); %>
+                </select>
+            </td></tr>
+
+            <td class="section" colspan="3">
+                Primary Contact:
+            </td></tr>
+            <td>
+                <input id="first_name" name="first_name" type="text" data-default="First Name" value="First Name" />
+            </td>
+            <td>
+                <input id="last_name" name="last_name" type="text" data-default="Last Name" value="Last Name" />
+            </td>
+            <td>
+                <input id="job_role" name="job_role" type="text" data-default="Job Role" value="Job Role" />
+            </td></tr>
+            <td colspan="3" align="right"> <button class="form_save">Save</button></td>
+        </table>
+
+
+</table>
+</div>

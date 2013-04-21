@@ -1,0 +1,41 @@
+<table style="width:100%; top:0px; padding-top:0px; position:relative;" align="right"><td>&nbsp;</td><td id="close_button">X</td><td style="width:5px"></td></table>
+<table class="new_form" style="margin-top:15px" cellpadding="0px" cellspacing="0px">
+            <td class="section" colspan="3">
+                Company:
+            </td>
+            </tr>
+            <td>
+                <input id="company_name" name="company_name" type="text" data-default="Company Name" value="Company Name" />
+            </td>
+            <td>
+                <select id="industries_select">
+                    <option value="none">Select Industry</option>
+                    <% _(industries).each(function(ind) { %>
+                    <option value="<%= ind.id %>"><%= ind.name %></option>
+                    <% }); %>
+                </select>
+            </td>
+            <td>
+                <select  id="company_sizes_select">
+                    <option value="none">Select Size</option>
+                    <% _(company_sizes).each(function(cs) { %>
+                    <option value="<%= cs.id %>"><%= cs.size %></option>
+                    <% }); %>
+                </select>
+            </td></tr>
+
+            <td class="section" colspan="3">
+                Primary Contact:
+            </td></tr>
+            <td>
+                <input id="first_name" name="first_name" type="text" data-default="First Name" value="First Name" />
+            </td>
+            <td>
+                <input id="last_name" name="last_name" type="text" data-default="Last Name" value="Last Name" />
+            </td>
+            <td>
+                <input id="job_role" name="job_role" type="text" data-default="Job Role" value="Job Role" />
+            </td></tr>
+        <td colspan="3" align="right"> <button class="form_save">Save</button></td>
+        </table>
+</table>

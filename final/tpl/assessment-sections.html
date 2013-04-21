@@ -1,0 +1,27 @@
+<table id="sections_table">
+    <td width="10%"></td>
+    <td width="80%" align="center">
+        <% _(categories).each(function(cat) {%>
+            <div class="assessment_section_tile_div">
+                <div id="<%= cat.id %>" class="assessment_section_tile">
+                <span class="assessment_tile_title"><%= cat.name %></span><br/><br/>
+                <img class="section_image" border="0" src="<%= cat.image %>"/>
+                <br/><br/>
+                <span class="assessment_tile_title">0 of <%= cat.questions.length %> complete</span>
+                </div>
+            </div>
+        <% }); %>
+        <br /><br />
+        <table style="text-align:center; align:center;" width="95.5%">
+            <td width="76%" class="completion_bar_base"></td>
+
+            <td width="12%" class="completion_bar_text"><%= total_answered %> of <%= total_questions %> answered</td>
+
+            <td width="12%" align="right" class="assessment_sections_results">
+                <button id="sections_results_button">Results</button>
+            </td>
+        </table>
+    </td>
+    <td width="10%"></td>
+</table>
+

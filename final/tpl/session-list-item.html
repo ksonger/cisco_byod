@@ -1,0 +1,64 @@
+<div class="head_inactive" id="head">
+    <table class="accordion_header_table">
+        <td width="30%"><%= company %></td>
+        <td width="40%"><%= main_contact_role %> <%= main_contact_fname %> <%= main_contact_lname %></td>
+        <td width="30%">
+            <% _(dates_modified_list).each(function(date, index) { %>
+            <% if (index == 0) { %>
+            <%= date %>
+            <% }}); %>
+        </td>
+    </table>
+</div>
+<div class="sessionListItemContent">
+    <div id="accordion_details">
+        <table id="accordion_details_table">
+            <tr>
+                <td id="bordered_table_cell">
+                    <table class="bordered">
+                        <tr>
+                            <thead>
+                            <th valign="top" id="dates">Other dates modified:</th>
+                            <th valign="top" id="interviewees">Interviewees:</th>
+                            </thead>
+                        </tr>
+                        <tr>
+                            <td>
+                                <% _(dates_modified_list).each(function(date) { %>
+                                <%= date %><br/>
+                                <% }); %>
+                            </td>
+                            <td>
+                                <% _(interviewees_list).each(function(user) { %>
+                                <%= user.role %> <%= user.fname %> <%= user.lname %> <br/>
+                                <% }); %>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td id="accordion_detail_buttons">
+                    <% if (status == 'open') { %>
+                    <button value="<%= id %>" id="assessment_continue" class="accordion_buttons">Continue Assessment
+                    </button>
+                    <br/>
+                    <button value="<%= id %>" id="assessment_status" class="accordion_buttons">Close Assessment</button>
+                    <br/>
+                    <button value="<%= id %>" id="assessment_edit" class="accordion_buttons">Edit Details</button>
+                    <% } else { %>
+                    <button value="<%= id %>" id="assessment_status" class="accordion_buttons">Re-open Assessment
+                    </button>
+                    <% } %>
+
+                    <br/>
+                    <button value="<%= id %>" id="assessment_results" class="accordion_buttons">Results Page</button>
+                </td>
+            </tr>
+            <tr>
+                <td><br/>Assessment ID:
+                    <div id="assessment_id"><%= id %></div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
