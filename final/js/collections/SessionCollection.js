@@ -10,16 +10,17 @@ window.SessionCollection = Backbone.Collection.extend({
     comparatorKey:"company",
     sortOrder:"forward",
     comparator:function(session) {
-        //return session.get(this.comparatorKey).toLowerCase();
+        var result;
             if(this.sortOrder == "forward")    {
-                return session.get(this.comparatorKey).toLowerCase();
+                result =  session.get(this.comparatorKey).toLowerCase();
             }   else if(this.sortOrder == "reverse")    {
                 var str = session.get(this.comparatorKey).toLowerCase().split("");
                 str = _.map(str, function(letter) {
-                    return String.fromCharCode(-(letter.charCodeAt(0)));
+                    result =  String.fromCharCode(-(letter.charCodeAt(0)));
                 });
-                return str;
+                result =  str;
             }
+        return result;
     },
     url:"../api/sessions"
 });

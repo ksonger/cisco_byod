@@ -8,17 +8,6 @@
 window.SessionsView = Backbone.View.extend({
 
     tagName:'div',
-
-    initialize:function () {
-        this.template = _.template(tpl.get('sessions'));
-        var self = this;
-        this.model.bind("change", function (session) {
-            //self.render();
-        });
-        this.$el = jQuery('<div/>', {
-            id:"sessions"
-        }).appendTo("#main");
-    },
     assessmentID:1,
     openSessions:null,
     closedSessions:null,
@@ -26,9 +15,22 @@ window.SessionsView = Backbone.View.extend({
     newForm:null,
     appState:"sessions",
     active:"inactive",
+
+    initialize:function () {
+        this.template = _.template(tpl.get('sessions'));
+
+        this.model.bind("change", function (session) {
+            //self.render();
+        });
+        this.$el = jQuery('<div/>', {
+            id:"sessions"
+        }).appendTo("#main");
+    },
+
     events: {
         "click #new_button":"newAssessment"
     },
+
     onEnter:function()  {
         try {
             $("#accordion-1").find("#session_list").getNiceScroll().show();
@@ -37,21 +39,21 @@ window.SessionsView = Backbone.View.extend({
 
         }
     },
+
     onExit:function()  {
         $("#accordion-1").find("#session_list").getNiceScroll().hide();
         $("#accordion-2").find("#session_list").getNiceScroll().hide();
     },
-    render:function (eventName) {
+
+    render:function () {
         this.$el.html('');
         TweenLite.to(this.$el, .01, {css:{autoAlpha:0}});
         this.$el.html(this.template());
 
         this.openSessions = new AccordionView({model:this.model, filter:"open"});
-        this.openSessions.render().$el;
         this.openSessions.$el.appendTo(this.$el.find("#accordion-1").find("#session_list"));
 
         this.closedSessions = new AccordionView({model:this.model, filter:"closed"});
-        this.closedSessions.render().$el;
         this.closedSessions.$el.appendTo(this.$el.find("#accordion-2").find("#session_list"));
 
         this.closedSessions.$el.css({"visibility":"hidden"});
@@ -61,7 +63,11 @@ window.SessionsView = Backbone.View.extend({
         }
         var sess = this;
 
-        this.$el.find("#active_button").click(function(e)    {
+        this.$el.find("#active_button").click(function()    {
+
+            var acc1 = $("#accordion-1"),
+                list1 = acc1.find("#session_list"),
+                acc2 = $("#accordion-2");
 
             $(this).find(".btn_left").attr("class", "btn_left_selected");
             $(this).find(".btn_middle").attr("class", "btn_middle_selected");
@@ -79,12 +85,12 @@ window.SessionsView = Backbone.View.extend({
             TweenLite.to(sess.closedSessions.$el, .01, {css:{autoAlpha:0}});
             TweenLite.to(sess.openSessions.$el, .01, {css:{autoAlpha:1}});
             sess.activeList = sess.openSessions;
-            $("#accordion-1").find("#session_list").getNiceScroll().show();
-            $("#accordion-2").find("#session_list").getNiceScroll().hide();
-            $("#accordion-1").css({"z-index":5000});
-            $("#accordion-2").css({"z-index":4000});
+            list1.getNiceScroll().show();
+            list1.getNiceScroll().hide();
+            acc1.css({"z-index":5000});
+            acc2.css({"z-index":4000});
         });
-        this.$el.find("#closed_button").click(function(e)    {
+        this.$el.find("#closed_button").click(function()    {
             $(this).find(".btn_left").attr("class", "btn_left_selected");
             $(this).find(".btn_middle").attr("class", "btn_middle_selected");
             $(this).find("#closed_assessments_button").attr("class", "selected_font");
@@ -100,16 +106,16 @@ window.SessionsView = Backbone.View.extend({
             TweenLite.to(sess.closedSessions.$el, .01, {css:{autoAlpha:1}});
             TweenLite.to(sess.openSessions.$el, .01, {css:{autoAlpha:0}});
             sess.activeList = sess.closedSessions;
-            $("#accordion-1").find("#session_list").getNiceScroll().hide();
-            $("#accordion-2").find("#session_list").getNiceScroll().show();
-            $("#accordion-2").css({"z-index":5000});
-            $("#accordion-1").css({"z-index":4000});
+            list1.getNiceScroll().hide();
+            list2.getNiceScroll().show();
+            acc2.css({"z-index":5000});
+            acc1.css({"z-index":4000});
         });
 
         this.addEventHandlers();
         try{
-            $("#accordion-1").find("#session_list").niceScroll({cursorcolor:"#c1c1c1", cursorborder:"1px solid #c1c1c1", cursorwidth:"10px", cursoropacitymax:.8, cursorborderradius: "6px"});
-            $("#accordion-2").find("#session_list").niceScroll({cursorcolor:"#c1c1c1", cursorborder:"1px solid #c1c1c1", cursorwidth:"10px", cursoropacitymax:.8, cursorborderradius: "6px"});
+            list1.niceScroll({cursorcolor:"#c1c1c1", cursorborder:"1px solid #c1c1c1", cursorwidth:"10px", cursoropacitymax:.8, cursorborderradius: "6px"});
+            list2.niceScroll({cursorcolor:"#c1c1c1", cursorborder:"1px solid #c1c1c1", cursorwidth:"10px", cursoropacitymax:.8, cursorborderradius: "6px"});
             $("#accordion-1").css({"z-index":5000});
         }   catch(e)    {
 
@@ -123,6 +129,7 @@ window.SessionsView = Backbone.View.extend({
         app.startInterval();
         return this;
     },
+
     addEventHandlers:function () {
         var sess = this;
         sess.$el.each(function () {
@@ -176,6 +183,7 @@ window.SessionsView = Backbone.View.extend({
             });
         });
     },
+
     newAssessment:function()    {
         if (app.newAssessmentView != null) {
             app.newAssessmentView.close();
@@ -183,8 +191,5 @@ window.SessionsView = Backbone.View.extend({
         app.newAssessmentView = new FormView({model:new Session(), industries:app.industryList});
         app.newAssessmentView.render();
         app.setState(app.newAssessmentView);
-    },
-    resumeAssessment:function() {
-
     }
 });

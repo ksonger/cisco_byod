@@ -7,6 +7,8 @@
  */
 window.FormView = Backbone.View.extend({
 
+    isNew: null,
+
     initialize:function () {
         this.template = _.template(tpl.get('form-view'));
         this.model.bind("change", this.render, this);
@@ -14,7 +16,7 @@ window.FormView = Backbone.View.extend({
             id:"assessment_form"
         }).appendTo("#main");
     },
-    isNew: null,
+
     onEnter:function () {
         try {
             $("#form_content").getNiceScroll().show();
@@ -22,20 +24,14 @@ window.FormView = Backbone.View.extend({
             console.log(e);
         }
     },
+
     onExit:function () {
         $("#form_content").getNiceScroll().hide();
     },
+
     events:{
         "change input":"change",
         "click .form_save":"saveSession"
-    },
-
-    change:function (event) {
-        var target = event.target;
-        // could change the model on the spot, like this:
-        // var change = {};
-        // change[target.name] = target.value;
-        // this.model.set(change);
     },
 
     saveSession:function () {
@@ -111,7 +107,8 @@ window.FormView = Backbone.View.extend({
         }
         return false;
     },
-    render:function (eventName) {
+
+    render:function () {
         _.each(this.options.industries.models, function (session) {
             this.$el.html(this.template(session.attributes));
         }, this);
@@ -124,12 +121,13 @@ window.FormView = Backbone.View.extend({
             this.$el.find("#company_sizes_select").val(this.model.get("company_size"));
             this.$el.find("#industries_select").val(this.model.get("company_industry"));
         }   else    {
-            this.isNew = true;;
+            this.isNew = true;
         }
         this.addEventHandlers();
         $("#form_content").niceScroll({cursorcolor:"#c1c1c1", cursorborder:"1px solid #c1c1c1", cursorwidth:"11px", cursoropacitymax:.8, cursorborderradius: "6px", cursorminheight: 100});
         return this;
     },
+
     addEventHandlers:function () {
 
         this.$el.find("#active_button").click(function(e)    {

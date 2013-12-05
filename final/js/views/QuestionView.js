@@ -6,12 +6,15 @@
  * To change this template use File | Settings | File Templates.
  */
 window.QuestionView = Backbone.View.extend({
+
+    answers:[],
+    selectedAnswers:[],
+    selectedInterviewee:null,
+
     initialize:function () {
 
     },
-    events:{
 
-    },
     change:function () {
         var responseObj = [];
         for (var i = 0; i < app.assessmentView.categories.length; i++) {
@@ -27,9 +30,7 @@ window.QuestionView = Backbone.View.extend({
        app.assessmentView.updateBar();
        app.assessmentView.assessmentAccordion.setQuestionClass(this.model.id, this.selectedAnswers.length);
     },
-    answers:[],
-    selectedAnswers:[],
-    selectedInterviewee:null,
+
     setSelected:function () {
         var selections = jQuery.parseJSON(app.currentSession.get("responses"));
         if (selections != null) {
@@ -49,7 +50,8 @@ window.QuestionView = Backbone.View.extend({
             }
         }
     },
-    render:function (eventName) {
+
+    render:function () {
         this.selectedAnswers = [];
         this.$el.html('');
         this.template = _.template(tpl.get("question_" + this.model.type.toLowerCase()));

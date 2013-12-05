@@ -9,10 +9,12 @@ window.ListQuestionItemView = Backbone.View.extend({
     initialize:function () {
         this.template = _.template(tpl.get('list-question-item'));
     },
+
     events: {
 
     },
-    render:function (eventName) {
+
+    render:function () {
         $(this.el).html(this.template(this.model));
         return this;
     }

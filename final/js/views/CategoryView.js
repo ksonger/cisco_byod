@@ -10,10 +10,12 @@ window.CategoryView = Backbone.View.extend({
     initialize:function () {
         this.template = _.template(tpl.get('category'));
     },
+
     events: {
 
     },
-    render:function (eventName) {
+
+    render:function () {
         this.questions = [];
         this.currentQuestion = 0;
         this.$el.attr("id", "category_div");
@@ -24,7 +26,7 @@ window.CategoryView = Backbone.View.extend({
             if(this.model.questions[i].category == this.model.id)   {
                 var ques = new QuestionView({model:this.model.questions[i]});
                 ques.render().$el.appendTo(this.$el.find(".category"));
-                var ntxt = i+1 + ") "
+                var ntxt = i+1 + ") ";
                 ques.$el.find(".number_text").html(ntxt);
                 this.questions.push(ques);
             }

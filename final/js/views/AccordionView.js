@@ -15,6 +15,7 @@ window.AccordionView = Backbone.View.extend({
 
         });
     },
+
     addItem:function (session) {
         var acc = this;
         session.attributes.dates_modified_list = session.attributes.modified.split(",");
@@ -28,6 +29,7 @@ window.AccordionView = Backbone.View.extend({
         this.addEventHandlers();
         //this.resetForm();
     },
+
     addEventHandlers:function (lastOpen) {
         var acc = this;
         acc.$el.find('#head').each(function () {
@@ -70,6 +72,7 @@ window.AccordionView = Backbone.View.extend({
             $(this).click(function (e) {
                 e.preventDefault();
                 app.currentSession = app.sessionList.get(parseInt(this.value));
+
                 /*
                  THIS LEADS TO THE CATEGORY SECTIONS PAGE THAT WAS REMOVED FROM THE FLOW
                  if(app.assessmentSectionsView == null)  {
@@ -82,6 +85,7 @@ window.AccordionView = Backbone.View.extend({
                  app.setState(app.assessmentSectionsView);
                  }
                  */
+
                 app.assessmentList.currentCategory = 1;
                 if (app.assessmentView != null) {
                     app.assessmentView.close();
@@ -155,6 +159,7 @@ window.AccordionView = Backbone.View.extend({
             });
         });
     },
+
     render:function (eventName) {
         var acc = this;
         var lastOpen = null;

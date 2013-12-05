@@ -9,5 +9,5 @@ window.Results = Backbone.Model.extend({
     urlRoot:"../api/results",
     defaults:{
         "id":1
-    },
+    }
 });

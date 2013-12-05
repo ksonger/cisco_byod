@@ -11,84 +11,84 @@ var app;
 
 var AppRouter = Backbone.Router.extend({
 
-    initialize:function () {
-        
+    initialize: function () {
+
     },
-    sessionList:null,
-    sessionView:null,
-    industryList:null,
-    assessmentSectionsView:null,
-    assessmentView:null,
-    resultsView:null,
-    newAssessmentView:null,
-    currentSession:null,
-    scrollWidths:24,
-    desktopWidth:1300,
-    phoneWidth:800,
-    int:null,
-    routes:{
-        "":"index"
+    sessionList: null,
+    sessionView: null,
+    industryList: null,
+    assessmentSectionsView: null,
+    assessmentView: null,
+    resultsView: null,
+    newAssessmentView: null,
+    currentSession: null,
+    scrollWidths: 24,
+    desktopWidth: 1300,
+    phoneWidth: 800,
+    int: null,
+    routes: {
+        "": "index"
     },
-    states:[],
-    currentState:null,
-    index:function () {
+    states: [],
+    currentState: null,
+    index: function () {
         this.begin();
     },
-    setState:function(state)    {
-        if(state != this.currentState)  {
-            if(this.currentState != null)    {
+    setState: function (state) {
+        if (state != this.currentState) {
+            if (this.currentState != null) {
                 this.currentState.onExit();
-                TweenLite.to(this.currentState.$el,.4, {css:{autoAlpha:0}});
+                TweenLite.to(this.currentState.$el, .4, {css: {autoAlpha: 0}});
             }
             this.currentState = state;
             this.currentState.onEnter();
         }
     },
 
-    begin:function (callback) {
+    begin: function (callback) {
         app.header = new HeaderView().render().$el.appendTo("#main");
-        if(ww <= app.phoneWidth && app.header.find(".application_title").html() != "Unified Workspace Tool")   {
+        if (ww <= app.phoneWidth && app.header.find(".application_title").html() != "Unified Workspace Tool") {
             app.header.find(".application_title").html("Unified Workspace Tool");
-        }   else if(ww > app.phoneWidth && app.header.find(".application_title").html() != "Unified Workspace Assessment Tool")   {
+        } else if (ww > app.phoneWidth && app.header.find(".application_title").html() != "Unified Workspace Assessment Tool") {
             app.header.find(".application_title").html("Unified Workspace Assessment Tool");
         }
-        if(isIE9())  {
+        if (isIE9()) {
             this.scrollWidths = -4;
         }
         if (this.sessionList) {
-            this.sessionList.fetch({success:function () {
+            this.sessionList.fetch({success: function () {
                 if (callback) callback();
             }});
         } else {
             this.industryList = new IndustryCollection();
-            this.industryList.fetch({success:function () {
+            this.industryList.fetch({success: function () {
                 // success
             }});
             this.sessionList = new SessionCollection();
-            this.sessionView = new SessionsView({model:app.sessionList});
-            this.sessionList.fetch({success:function () {
+            this.sessionView = new SessionsView({model: app.sessionList});
+            this.sessionList.fetch({success: function () {
 
                 app.sessionView.render();
                 app.setState(app.sessionView);
                 if (callback) callback();
-            }, error:function(e)    {
+            }, error: function (e) {
                 console.log(e);
             }});
             this.assessmentList = new AssessmentCollection();
         }
     },
-    startInterval:function()    {
-        try    {
+    startInterval: function () {
+        try {
             clearInterval(int);
-        }   catch(e)    {
+        } catch (e) {
 
         }
-        int=self.setInterval("$(window).resize()",50);
+        int = self.setInterval("$(window).resize()", 50);
     },
-    stopInterval:function() {
+    stopInterval: function () {
         clearInterval(int);
-        int=self.setInterval("$(window).resize()",1000);
-        TweenLite.to($(this.currentState.$el),.5, {css:{autoAlpha:1}});
+        int = self.setInterval("$(window).resize()", 1000);
+        TweenLite.to($(this.currentState.$el), .5, {css: {autoAlpha: 1}});
     }
 });
 
@@ -147,188 +147,216 @@ tpl.loadTemplates([
 var wh = $(window).height();
 var ww = $(window).width();
 
-$(window).resize(function() {
-    if(app != undefined)    {
-        
+$(window).resize(function () {
+    if (app != undefined) {
+
         try {
-            if($(window).height() != wh || $(window).width() != ww) {
-                if(ww <= app.phoneWidth && app.header.find(".application_title").html() != "Unified Workspace Tool")   {
-                    app.header.find(".application_title").html("Unified Workspace Tool");
-                }   else if(ww > app.phoneWidth && app.header.find(".application_title").html() != "Unified Workspace Assessment Tool")   {
-                    app.header.find(".application_title").html("Unified Workspace Assessment Tool");
+            if ($(window).height() != wh || $(window).width() != ww) {
+
+                var title = app.header.find(".application_title");
+
+                if (ww <= app.phoneWidth && title.html() != "Unified Workspace Tool") {
+                    title.html("Unified Workspace Tool");
+                } else if (ww > app.phoneWidth && title.html() != "Unified Workspace Assessment Tool") {
+                    title.html("Unified Workspace Assessment Tool");
                 }
             }
-            if(app.currentState == app.sessionView)  {
-                if($("#accordion-1").find("#session_list").height() != ($(window).height() - $("#accordion-1").find("#session_list").offset().top - 10))    {
-                    $("#accordion-1").find("#session_list").height($(window).height() - $("#accordion-1").find("#session_list").offset().top - 10);
-                    $("#accordion-2").find("#session_list").height($(window).height() - $("#accordion-2").find("#session_list").offset().top - 10);
-                    $("#accordion-1").find("#session_list").getNiceScroll()[0].updateScrollBar();
-                    $("#accordion-2").find("#session_list").getNiceScroll()[0].updateScrollBar();
-                }   else    {
+            if (app.currentState == app.sessionView) {
+                var list1 = $("#accordion-1").find("#session_list"),
+                    list2 = $("#accordion-2").find("#session_list");
+
+                if (list1.height() != ($(window).height() - list1.offset().top - 10)) {
+
+                    list1.height($(window).height() - list1.offset().top - 10);
+                    list1.getNiceScroll()[0].updateScrollBar();
+
+                    list2.height($(window).height() - list2.offset().top - 10);
+                    list2.getNiceScroll()[0].updateScrollBar();
+
+                } else {
                     app.stopInterval();
                 }
             }
-            if(app.currentState == app.assessmentView)  {
-                $("#assessment_nav").find("#list").height($(window).height() - $("#assessment_nav").find("#list").offset().top - 86);
-                var w = $("#assessment_table").width() - $("#assessment_table").offset().left - $("#assessment_nav").width() - $("#thumb_seperator").width() + $("#assessment_nav").find("#list").offset().left + app.scrollWidths;
-                if(!app.assessmentView.nav_expanded)    {
+            if (app.currentState == app.assessmentView) {
+
+                var nav = $("#assessment_nav"),
+                    assess_table = $("#assessment_table"),
+                    assess_main = $("#assessment_main"),
+                    result_table = $("#results_table"),
+                    results_main = $("#results_main"),
+                    form_content = $("#form_content"),
+                    thumb = $("#thumb_seperator");
+
+
+                nav.find("#list").height($(window).height() - nav.find("#list").offset().top - 86);
+                w = assess_table.width() - assess_table.offset().left - nav.width() - thumb.width() + nav.find("#list").offset().left + app.scrollWidths;
+                if (!app.assessmentView.nav_expanded) {
                     w += 250;
                 }
-                if(w > 250)    {
-                    $("#assessment_main").width(w); 
+                if (w > 250) {
+                    assess_main.width(w);
                 }
-                if($("#assessment_main").height() != $(window).height() - $("#assessment_main").offset().top - 86)    {
-                    $("#assessment_main").height($(window).height() - $("#assessment_main").offset().top - 86);
-                    $("#thumb_seperator").height($(window).height() - $("#assessment_main").offset().top - 86);
-                    $("#assessment_nav").find("#list").css({"top":($("#assessment_table").offset().top-83)+"px"});
-                    $("#assessment_nav").find("#list").getNiceScroll()[0].updateScrollBar();
-                }   else    {
+                if (assess_main.height() != $(window).height() - assess_main.offset().top - 86) {
+                    assess_main.height($(window).height() - assess_main.offset().top - 86);
+                    thumb.height($(window).height() - assess_main.offset().top - 86);
+                    nav.find("#list").css({"top": (assess_table.offset().top - 83) + "px"});
+                    nav.find("#list").getNiceScroll()[0].updateScrollBar();
+                } else {
                     app.stopInterval();
                 }
-                if($(window).height() != wh || $(window).width() != ww) {
+                if ($(window).height() != wh || $(window).width() != ww) {
 
-                    try{
-                        if(!app.assessmentView.nav_expanded)    {
+                    try {
+                        if (!app.assessmentView.nav_expanded) {
                             var w = 250;
-                            TweenLite.to($("#assessment_nav"),.01, {css:{width:"1px"}, ease:Sine.easeOut});
-                            TweenLite.to($("#assessment_nav").find("#list"),.01, {css:{"left":-w+"px"}, ease:Sine.easeOut});
+                            TweenLite.to(nav, .01, {css: {width: "1px"}, ease: Sine.easeOut});
+                            TweenLite.to(nav.find("#list"), .01, {css: {"left": -w + "px"}, ease: Sine.easeOut});
                         }
                         app.assessmentView.updateBar();
                         app.assessmentView.mainScroll.measure();
-                        if(isIE9()) {
-                            $("#assessment_main").scrollTop(app.assessmentView.savedScroll);
+                        if (isIE9()) {
+                            assess_main.scrollTop(app.assessmentView.savedScroll);
                         }
-                    }   catch(e)    {
-                        
+                    } catch (e) {
+
                     }
                 }
             }
-            if(app.currentState == app.resultsView)  {
+            if (app.currentState == app.resultsView) {
 
-                if($("#results_main").height() != $(window).height() - $("#results_main").offset().top - 10)    {
-                    $("#results_main").height($(window).height() - $("#results_main").offset().top - 10);
-                   $("#results_table").height($(window).height() - $("#results_table").offset().top - 10); 
-                   app.resultsView.activeScreen.$el.height($(window).height() - $("#results_main").offset().top - 11);
-                }   else    {
+                if (result_main.height() != $(window).height() - result_main.offset().top - 10) {
+                    result_main.height($(window).height() - result_main.offset().top - 10);
+                    result_table.height($(window).height() - result_table.offset().top - 10);
+                    app.resultsView.activeScreen.$el.height($(window).height() - result_main.offset().top - 11);
+                } else {
                     app.stopInterval();
                 }
-                
-                if($(window).width() != ww || $(window).height() != wh) { 
-                    
+
+                if ($(window).width() != ww || $(window).height() != wh) {
+
                 }
-                if($(window).width() != ww) {
-                    if(ww <= app.desktopWidth && ww > app.phoneWidth)    {
-                        for(var section in app.resultsView.sections) {
-                          if(app.resultsView.sections[section].size != "tablet")    {
-                            app.resultsView.sections[section].size = "tablet";
-                            app.resultsView.sections[section].render();
-                          }
+                if ($(window).width() != ww) {
+
+                    var sections = app.resultsView.sections,
+                        section;
+
+                    if (ww <= app.desktopWidth && ww > app.phoneWidth) {
+                        for (section in sections) {
+                            if (sections.hasOwnProperty(section)) {
+                                if (sections[section].size != "tablet") {
+                                    sections[section].size = "tablet";
+                                    sections[section].render();
+                                }
+                            }
                         }
-                    } else if(ww > app.desktopWidth)    {
-                        for(var section in app.resultsView.sections) {
-                          if(app.resultsView.sections[section].size != "desktop")    {
-                            app.resultsView.sections[section].size = "desktop";
-                            app.resultsView.sections[section].render();
-                          }
+                    } else if (ww > app.desktopWidth) {
+                        for (section in sections) {
+                            if (sections.hasOwnProperty(section)) {
+                                if (sections[section].size != "desktop") {
+                                    sections[section].size = "desktop";
+                                    sections[section].render();
+                                }
+                            }
                         }
-                    }   else if(ww <= app.phoneWidth)   {
-                        for(var section in app.resultsView.sections) {
-                          if(app.resultsView.sections[section].size != "phone")    {
-                            app.resultsView.sections[section].size = "phone";
-                            app.resultsView.sections[section].render();
-                          }
+                    } else if (ww <= app.phoneWidth) {
+                        for (section in sections) {
+                            if (sections.hasOwnProperty(section)) {
+                                if (sections[section].size != "phone") {
+                                    sections[section].size = "phone";
+                                    sections[section].render();
+                                }
+                            }
                         }
                     }
                 }
             }
-        }   catch(e)    {
+        } catch (e) {
 
         }
-        if(app.currentState == app.newAssessmentView)  {
-            try{ 
-                if($("#form_content").height() != $(window).height() - $("#form_content").offset().top - 10)    {
-                    $("#form_content").height($(window).height() - $("#form_content").offset().top - 10);
+        if (app.currentState == app.newAssessmentView) {
+            try {
+                if (form_content.height() != $(window).height() - form_content.offset().top - 10) {
+                    form_content.height($(window).height() - form_content.offset().top - 10);
                 }
-                
-            }   catch(e)    {
+
+            } catch (e) {
 
             }
         }
-        
+
         wh = $(window).height();
         ww = $(window).width();
     }
 
 });
 
-(function(){
- 
+(function () {
+
     var special = jQuery.event.special,
         uid1 = 'D' + (+new Date()),
         uid2 = 'D' + (+new Date() + 1);
- 
+
     special.scrollstart = {
-        setup: function() {
- 
+        setup: function () {
+
             var timer,
-                handler =  function(evt) {
- 
-                    var _self = this,
-                        _args = arguments;
- 
+                handler = function (evt) {
+
+                    var _self = this;
+
                     if (timer) {
                         clearTimeout(timer);
                     } else {
                         evt.type = 'scrollstart';
-                        jQuery.event.handle.apply(_self, _args);
+                        jQuery.event.handle.apply(_self, arguments);
                     }
- 
-                    timer = setTimeout( function(){
+
+                    timer = setTimeout(function () {
                         timer = null;
                     }, special.scrollstop.latency);
- 
+
                 };
- 
+
             jQuery(this).bind('scroll', handler).data(uid1, handler);
- 
+
         },
-        teardown: function(){
-            jQuery(this).unbind( 'scroll', jQuery(this).data(uid1) );
+        teardown: function () {
+            jQuery(this).unbind('scroll', jQuery(this).data(uid1));
         }
     };
- 
+
     special.scrollstop = {
         latency: 100,
-        setup: function() {
- 
+        setup: function () {
+
             var timer,
-                    handler = function(evt) {
- 
+                handler = function (evt) {
+
                     var _self = this,
                         _args = arguments;
- 
+
                     if (timer) {
                         clearTimeout(timer);
                     }
- 
-                    timer = setTimeout( function(){
- 
+
+                    timer = setTimeout(function () {
+
                         timer = null;
                         evt.type = 'scrollstop';
                         jQuery.event.handle.apply(_self, _args);
- 
+
                     }, special.scrollstop.latency);
- 
+
                 };
- 
+
             jQuery(this).bind('scroll', handler).data(uid2, handler);
- 
+
         },
-        teardown: function() {
-            jQuery(this).unbind( 'scroll', jQuery(this).data(uid2) );
+        teardown: function () {
+            jQuery(this).unbind('scroll', jQuery(this).data(uid2));
         }
     };
- 
+
 })();
 
 (function ($) {
@@ -388,10 +416,10 @@ $(window).resize(function() {
 
 })(jQuery);
 
-var isIE9 = function()  {
-    if($.browser.name == "msie" && $.browser.version < 10)  {
-        return true;
-    }   else    {
-        return false;
+var isIE9 = function () {
+    var result = false;
+    if ($.browser.name == "msie" && $.browser.version < 10) {
+        result = true;
     }
-}
+    return result;
+};

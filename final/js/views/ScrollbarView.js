@@ -1,4 +1,29 @@
  window.ScrollbarView = Backbone.View.extend({
+
+     initialized:false,
+     hInt:null,
+     n:0,
+     startY:0,
+     target:null,
+     container:null,
+     nativeScroll:null,
+     contentHeight:null,
+     boxHeight:null,
+     scrollbarHandle:null,
+     scrollPosition:null,
+     currentScrollPosition:0,
+     currentTargetHeight:0,
+     contentPosition:null,
+     isScrollingWithMouse:false,
+     isScrollingWithMenu:false,
+     scrollBarHandlePosition:null,
+     position:null,
+     scroll_class:null,
+     win:jQuery(document),
+     scrollEventHandler:null,
+     scrollPressHandler:null,
+     scrollStopHandler:null,
+
     initialize:function () {
         var scr = this;
         (function(view) {
@@ -6,29 +31,6 @@
       })(this);
 
     },
-    initialized:false,
-    hInt:null,
-    n:0,
-    startY:0,
-    target:null,
-    container:null,
-    nativeScroll:null,
-    contentHeight:null,
-    boxHeight:null,
-    scrollbarHandle:null,
-    scrollPosition:null,
-    currentScrollPosition:0,
-    currentTargetHeight:0,
-    contentPosition:null,
-    isScrollingWithMouse:false,
-    isScrollingWithMenu:false,
-    scrollBarHandlePosition:null,
-    position:null,
-    scroll_class:null,
-    win:jQuery(document),
-    scrollEventHandler:null,
-    scrollPressHandler:null,
-    scrollStopHandler:null,
 
     render:function()   {
         this.target = this.options.target;
@@ -37,6 +39,7 @@
         this.scroll_id = this.options.scroll_id;
         return this;
     },
+
     show:function() {
         try{
             window.clearInterval(this.hInt);
@@ -46,18 +49,21 @@
         TweenLite.to(this.scrollBarHandle,.2, {css:{alpha:.8}, ease:Sine.easeOut});
         this.hInt = window.setTimeout(this.hide, 1500);
     },
+
     hide:function() {
         TweenLite.to(app.assessmentView.mainScroll.scrollBarHandle,.2, {css:{alpha:0}, ease:Sine.easeOut});
     },
+
     scrollTo:function(val)  {
         this.isScrollingWithMenu = true;
         $("#assessment_main").scrollTop(val);
         this.isScrollingWithMenu = false;
     },
+
     measure:function()  {
         if($(this.container).height() > 200)    {
             var scr = this;
-            var acc = app.assessmentView.assessmentAccordion;
+
             var element = jQuery(scr.container);
             if(!scr.initialized)    {
                 this.$el = jQuery('<div/>', {
@@ -113,7 +119,7 @@
 
 
             if(scr.scrollEventHandler == null) {
-                scr.scrollEventHandler = scr.nativeScroll.bind("scroll", function (e) {
+                scr.scrollEventHandler = scr.nativeScroll.bind("scroll", function () {
                     scr.position = scr.nativeScroll.scrollTop() / scr.contentHeight;
                     scr.scrollPosition = (scr.position * scr.boxHeight) + scr.n;
                     scr.scrollBarHandle.css("top", scr.scrollPosition + "px");
@@ -165,7 +171,7 @@
             }
             
             if(scr.scrollStopHandler == null)   {
-                scr.scrollStopHandler = scr.nativeScroll.bind('scrollstop', function(e){
+                scr.scrollStopHandler = scr.nativeScroll.bind('scrollstop', function(){
                     app.assessmentView.savedScroll = scr.nativeScroll.scrollTop();
                     //if(!scr.isScrollingWithMenu)    {
                         //app.assessmentView.assessmentAccordion.updateMenu(scr.nativeScroll.scrollTop());

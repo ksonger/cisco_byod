@@ -9,7 +9,8 @@
  	initialize:function () {
  		this.template = _.template(tpl.get('interviewees'));
  	},
- 	render:function (eventName) {
+
+ 	render:function () {
         this.$el.html('');
  		this.$el.attr("id", "interviewees_main");
  		this.$el.html(this.template(this.model.attributes));
@@ -21,7 +22,10 @@
         }
  		return this;
  	},
+
  	addEventListeners:function()	{
+        var interviewees_main = $("#interviewees_main");
+
  		this.$el.find("#interviewee_select_button").each(function()	{
  			$(this).click(function()	{
  				if($(this).attr("class") == "current_interviewee")	{
@@ -29,9 +33,10 @@
  				}
  			});
  		});
+
  		this.$el.find(".form_save").click(function()	{
- 			if($("#interviewees_main").find("#first_name").val() != $("#interviewees_main").find("#first_name").attr('data-default') && $("#interviewees_main").find("#last_name").val() != $("#interviewees_main").find("#last_name").attr('data-default') && $("#interviewees_main").find("#job_role").val() != $("#interviewees_main").find("#job_role").attr('data-default'))	{
- 				app.assessmentView.selectNewInterviewee($("#interviewees_main").find("#first_name").val(), $("#interviewees_main").find("#last_name").val(), $("#interviewees_main").find("#job_role").val());
+ 			if(interviewees_main.find("#first_name").val() != interviewees_main.find("#first_name").attr('data-default') && interviewees_main.find("#last_name").val() != interviewees_main.find("#last_name").attr('data-default') && interviewees_main.find("#job_role").val() != interviewees_main.find("#job_role").attr('data-default'))	{
+ 				app.assessmentView.selectNewInterviewee(interviewees_main.find("#first_name").val(), interviewees_main.find("#last_name").val(), interviewees_main.find("#job_role").val());
  			}	else{
  				console.log("highlight missing inputs");
  			}

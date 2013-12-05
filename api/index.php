@@ -39,7 +39,9 @@ function getSessions() {
 
             //contacts
             $sessions[$i]['interviewees_list'] = array();
-            //TODO: Fix this, no need to make all these queries
+
+            //TODO: Fix this before production, no need to make all these queries
+
             $sql = "SELECT * FROM contacts WHERE id IN ($intstring)";
             $db = getConnection();
             $stmt = $db->prepare($sql);

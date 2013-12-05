@@ -62,6 +62,7 @@ window.AnswerView = Backbone.View.extend({
         $("#assessment_main").scrollTop(app.assessmentView.savedScroll);
         return false;
     },
+
     setValue:function(obj)  {
         if(obj.type == 'radio' || obj.type == 'checkbox')    {
             $(this.el).find("#"+obj.id).attr('checked', true);
@@ -69,7 +70,8 @@ window.AnswerView = Backbone.View.extend({
             $(this.el).find("#"+obj.id).val(obj.value);
         }
     },
-    render:function (eventName) {
+
+    render:function () {
         this.template = _.template(tpl.get("answer_"+this.model.type.toLowerCase()));
         $(this.el).html(this.template(this.model));
         $(this.el).css({"align":"center", "text-align":"center", "display":"inline-block", "width":"100%", "height":"100%"});

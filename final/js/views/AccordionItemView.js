@@ -12,6 +12,7 @@ window.AccordionItemView = Backbone.View.extend({
     initialize:function () {
         this.template = _.template(tpl.get('session-list-item'));
     },
+
     render:function (eventName) {
         this.$el.html(this.template(this.model.toJSON()));
         return this;

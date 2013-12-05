@@ -9,7 +9,8 @@ window.MainContentBorderView = Backbone.View.extend({
     initialize:function () {
 
     },
-    render:function (eventName) {
+
+    render:function () {
         this.$el.html('');
         this.template = _.template(tpl.get("main-content-border"));
         this.$el.html(this.template()).appendTo("#main");

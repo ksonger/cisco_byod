@@ -1,18 +1,22 @@
 window.ResultsView = Backbone.View.extend({
 
-    initialize:function () {
-        this.template = _.template(tpl.get('results'));
-    },
     openElement:null,
     activeScreen:null,
     sections:{},
+
+    initialize:function () {
+        this.template = _.template(tpl.get('results'));
+    },
+
     onEnter:function()  {
 
     },
+
     onExit:function()   {
         this.sections[$(this.openElement).find("#section_id").val()].hideScreen();
     },
-    render:function (eventName) {
+
+    render:function () {
         this.$el.html('');
         this.$el.html(this.template(this.model.attributes));
         this.$el.attr("id", "results");
@@ -22,6 +26,7 @@ window.ResultsView = Backbone.View.extend({
         app.startInterval();
         return this;
     },
+
     createScreens:function()    {
         for(var i=0;i<this.model.attributes.sections.length;i++)    {
             var scr = new ResultsScreenView({model:this.model.attributes.sections[i]});
@@ -44,6 +49,7 @@ window.ResultsView = Backbone.View.extend({
             }
         }
     },
+
     addEventHandlers:function() {
         this.$el.find("#home_button_cell").click(function (e) {
             e.preventDefault();
@@ -57,7 +63,7 @@ window.ResultsView = Backbone.View.extend({
                 res.openElement = $(this);
                 $(this).attr("class", "results_nav_item_active");
             }
-            $(this).click(function (e) {
+            $(this).click(function () {
                 var isSameElement = (res.openElement == this);
                 if (res.openElement != null) {   
                     if (!isSameElement) {

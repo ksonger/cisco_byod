@@ -20,14 +20,14 @@ window.Assessment = Backbone.Model.extend({
          this.currentQuestion = num;
         app.assessmentView.updateView();
     },
-    getCurrentQuestion:function(num)    {
+    getCurrentQuestion:function()    {
          return this.currentQuestion;
     },
     setCurrentCategory:function(num)    {
         this.currentCategory = num;
         app.assessmentView.updateView();
     },
-    getCurrentCategory:function(num)    {
+    getCurrentCategory:function()    {
         return this.currentCategory;
     }
 });

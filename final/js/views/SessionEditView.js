@@ -10,10 +10,12 @@ window.SessionEditView = Backbone.View.extend({
     initialize:function () {
         this.template = _.template(tpl.get('session-edit-view'));
     },
+
     events:{
         "click .form_save":"saveSession"
     },
-    render:function (eventName) {
+
+    render:function () {
         this.$el.html('');
         this.$el.attr("id", "session_edit_main");
         _.each(this.options.industries.models, function (session) {
@@ -30,6 +32,7 @@ window.SessionEditView = Backbone.View.extend({
         $("#session_edit_main").niceScroll({cursorcolor:"#c1c1c1", cursorborder:"1px solid #c1c1c1", cursorwidth:"11px", cursoropacitymax:.8, cursorborderradius: "6px", cursorminheight: 100});
         return this;
     },
+
     saveSession:function () {
         var d = new Date();
         var now = d.getFullYear() + '-' + (('' + d.getMonth()).length < 2 ? '0' : '') + d.getMonth() + '-' + (('' + d.getDate()).length < 2 ? '0' : '') + d.getDate();
@@ -72,6 +75,7 @@ window.SessionEditView = Backbone.View.extend({
         });
         return false;
     },
+
     addEventHandlers:function () {
         this.$el.find("#close_button").click(function() {
             app.assessmentView.hideEdit();
