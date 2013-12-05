@@ -35,15 +35,15 @@ window.QuestionView = Backbone.View.extend({
         var selections = jQuery.parseJSON(app.currentSession.get("responses"));
         if (selections != null) {
             for (var i = 0; i < selections.length; i++) {
-                if (selections[i].question_id == this.model.id) {
+                if (selections[i].question_id === this.model.id) {
                     this.selectedAnswers.push(selections[i]);
                     for (var j = 0; j < this.answers.length; j++) {
                         var actual_id = selections[i].id.replace("answer_", "");
-                        if (parseInt(this.answers[j].model.id) == parseInt(actual_id)) {
+                        if (parseInt(this.answers[j].model.id) === parseInt(actual_id)) {
                             this.answers[j].setValue(selections[i]);
                         }
                     }
-                    if(this.selectedInterviewee == null && selections[i].answered_by != null)   {
+                    if(this.selectedInterviewee === null && selections[i].answered_by != null)   {
                         this.selectedInterviewee = selections[i].answered_by;
                     }
                 }

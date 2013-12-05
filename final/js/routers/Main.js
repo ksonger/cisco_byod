@@ -161,7 +161,7 @@ $(window).resize(function () {
                     title.html("Unified Workspace Assessment Tool");
                 }
             }
-            if (app.currentState == app.sessionView) {
+            if (app.currentState === app.sessionView) {
                 var list1 = $("#accordion-1").find("#session_list"),
                     list2 = $("#accordion-2").find("#session_list");
 
@@ -177,7 +177,7 @@ $(window).resize(function () {
                     app.stopInterval();
                 }
             }
-            if (app.currentState == app.assessmentView) {
+            if (app.currentState === app.assessmentView) {
 
                 var nav = $("#assessment_nav"),
                     assess_table = $("#assessment_table"),
@@ -222,7 +222,7 @@ $(window).resize(function () {
                     }
                 }
             }
-            if (app.currentState == app.resultsView) {
+            if (app.currentState === app.resultsView) {
 
                 if (result_main.height() != $(window).height() - result_main.offset().top - 10) {
                     result_main.height($(window).height() - result_main.offset().top - 10);
@@ -273,7 +273,7 @@ $(window).resize(function () {
         } catch (e) {
 
         }
-        if (app.currentState == app.newAssessmentView) {
+        if (app.currentState === app.newAssessmentView) {
             try {
                 if (form_content.height() != $(window).height() - form_content.offset().top - 10) {
                     form_content.height($(window).height() - form_content.offset().top - 10);
@@ -418,7 +418,7 @@ $(window).resize(function () {
 
 var isIE9 = function () {
     var result = false;
-    if ($.browser.name == "msie" && $.browser.version < 10) {
+    if ($.browser.name === "msie" && $.browser.version < 10) {
         result = true;
     }
     return result;

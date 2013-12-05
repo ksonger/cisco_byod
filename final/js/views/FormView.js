@@ -89,7 +89,7 @@ window.FormView = Backbone.View.extend({
                 }
                 var list = app.currentSession.get("interviewees_list");
                 for(var i=0;i<list.length;i++)   {
-                    if(parseInt(list[i].id) == parseInt(app.currentSession.get("main_contact")))    {
+                    if(parseInt(list[i].id) === parseInt(app.currentSession.get("main_contact")))    {
                         list[i].fname = form.$el.find('#first_name').val();
                         list[i].lname = form.$el.find('#last_name').val();
                         list[i].role = form.$el.find('#job_role').val();
@@ -158,12 +158,12 @@ window.FormView = Backbone.View.extend({
             var input = $('input[type=text]');
             input.focus(function() {
                 var el = $(this);
-                if(el.val() == el.attr('data-default'))    {
+                if(el.val() === el.attr('data-default'))    {
                     $(this).val('');
                 }
             }).blur(function() {
                     var el = $(this);
-                    if(el.val() == '')  {
+                    if(el.val() === '')  {
                         el.val(el.attr('data-default'));
                     }
                 });

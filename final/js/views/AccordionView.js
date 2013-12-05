@@ -36,7 +36,7 @@ window.AccordionView = Backbone.View.extend({
             $(this).click(function (e) {
                 e.preventDefault();
                 if (acc.openElement != null) {
-                    var isSameElement = (acc.openElement == this);
+                    var isSameElement = (acc.openElement === this);
                     if (!isSameElement) {
                         $(acc.openElement).attr("class", "head_inactive");
                         TweenLite.to($(acc.openElement).next(".sessionListItemContent"), .3, {css:{height:1, autoAlpha:0}});
@@ -49,18 +49,18 @@ window.AccordionView = Backbone.View.extend({
             });
             $(this).hover(
                 function () {
-                    if ($(this).attr("class") == "head_inactive") {
+                    if ($(this).attr("class") === "head_inactive") {
                         $(this).attr("class", "head_hover");
                     }
                 },
                 function () {
-                    if ($(this).attr("class") == "head_hover") {
+                    if ($(this).attr("class") === "head_hover") {
                         $(this).attr("class", "head_inactive");
                     }
                 }
             );
             if (lastOpen != null) {
-                if (lastOpen == $(this).next(".sessionListItemContent").find("#assessment_id").html()) {
+                if (lastOpen === $(this).next(".sessionListItemContent").find("#assessment_id").html()) {
                     $(this).next(".content").css({"visibility":"visible"});
                     $(this).attr("class", "head_active");
                     TweenLite.to($(this).next(".sessionListItemContent"), .01, {css:{height:$(this).next(".sessionListItemContent").find("#accordion_details").height(), autoAlpha:1}});
@@ -75,7 +75,7 @@ window.AccordionView = Backbone.View.extend({
 
                 /*
                  THIS LEADS TO THE CATEGORY SECTIONS PAGE THAT WAS REMOVED FROM THE FLOW
-                 if(app.assessmentSectionsView == null)  {
+                 if(app.assessmentSectionsView === null)  {
                  app.assessmentSectionsView = new AssessmentSectionsView({model:new Assessment()});
                  app.assessmentSectionsView.model.fetch({success:function () {
                  app.assessmentSectionsView.render();
@@ -101,11 +101,11 @@ window.AccordionView = Backbone.View.extend({
             $(this).click(function (e) {
                 e.preventDefault();
                 var new_status = "closed";
-                if (acc.options.filter == "closed") {
+                if (acc.options.filter === "closed") {
                     new_status = "open";
                 }
                 _.each(acc.model.models, function (session) {
-                    if (session.get("id") == parseInt(this.value)) {
+                    if (session.get("id") === parseInt(this.value)) {
                         session.set({status:new_status});
                         session.save();
                         app.sessionView.openSessions.render();
@@ -118,7 +118,7 @@ window.AccordionView = Backbone.View.extend({
             $(this).click(function (e) {
                 e.preventDefault();
                 _.each(acc.model.models, function (session) {
-                    if (session.get("id") == parseInt(this.value)) {
+                    if (session.get("id") === parseInt(this.value)) {
                         if (app.newAssessmentView != null) {
                             app.newAssessmentView.close();
                         }
@@ -143,7 +143,7 @@ window.AccordionView = Backbone.View.extend({
                 app.assessmentView.model.fetch({success:function () {
                     app.assessmentView.render();
                     _.each(acc.model.models, function (session) {
-                        if (session.get("id") == parseInt(btn.value)) {
+                        if (session.get("id") === parseInt(btn.value)) {
                             app.currentSession = session;
                             if (app.resultsView != null) {
                                 app.resultsView.close();
@@ -170,7 +170,7 @@ window.AccordionView = Backbone.View.extend({
 
         acc.$el.html('');
         _.each(this.model.models, function (session) {
-            if (session.get("status") == acc.options.filter) {
+            if (session.get("status") === acc.options.filter) {
                 var item = new AccordionItemView({model:session});
                 acc.$el.append(item.render().el.innerHTML);
                 TweenLite.to(acc.$el.find(".sessionListItemContent"), .01, {css:{height:1, autoAlpha:0}});

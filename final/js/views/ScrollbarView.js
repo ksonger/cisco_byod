@@ -86,7 +86,7 @@
                         scr.hide();
                     }
                 );
-                if(scr.scrollBarHandle == null) {
+                if(scr.scrollBarHandle === null) {
                     scr.scrollBarHandle = jQuery('<div/>', {});
                     scr.scrollBarHandle.attr({"class": scr.scroll_class});
                     scr.scrollBarHandle.appendTo(scr.$el);
@@ -100,7 +100,7 @@
             scr.$el.css({"left":($(scr.container).width() - scr.scrollBarHandle.width() + 1) + "px", height:element.height()+"px"});
 
             // Getting some numbers
-            if(scr.nativeScroll == null)    {
+            if(scr.nativeScroll === null)    {
                  scr.nativeScroll = element.find(scr.target);
             }           
             scr.contentHeight = scr.nativeScroll.get(0).scrollHeight - element.height();
@@ -110,7 +110,7 @@
             }   else    {
                 scr.scrollBarHandle.css({"visibility":"hidden"});
             }
-            if(scr.scrollBarHandlePosition == null)    {
+            if(scr.scrollBarHandlePosition === null)    {
                 scr.scrollBarHandlePosition = 0;
             }
 
@@ -118,7 +118,7 @@
                         // page up, page down, etc.
 
 
-            if(scr.scrollEventHandler == null) {
+            if(scr.scrollEventHandler === null) {
                 scr.scrollEventHandler = scr.nativeScroll.bind("scroll", function () {
                     scr.position = scr.nativeScroll.scrollTop() / scr.contentHeight;
                     scr.scrollPosition = (scr.position * scr.boxHeight) + scr.n;
@@ -137,7 +137,7 @@
                         // Scrolling the native scroll when moving the handle with the mouse
 
 
-            if(scr.scrollPressHandler == null)  {
+            if(scr.scrollPressHandler === null)  {
                 scr.scrollPressHandler = scr.scrollBarHandle.bind("mousedown", function (e) {
                     scr.startY = e.clientY;
                     scr.isScrollingWithMouse = true;
@@ -170,7 +170,7 @@
                 });
             }
             
-            if(scr.scrollStopHandler == null)   {
+            if(scr.scrollStopHandler === null)   {
                 scr.scrollStopHandler = scr.nativeScroll.bind('scrollstop', function(){
                     app.assessmentView.savedScroll = scr.nativeScroll.scrollTop();
                     //if(!scr.isScrollingWithMenu)    {

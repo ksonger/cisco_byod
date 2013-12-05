@@ -11,9 +11,9 @@ window.SessionCollection = Backbone.Collection.extend({
     sortOrder:"forward",
     comparator:function(session) {
         var result;
-            if(this.sortOrder == "forward")    {
+            if(this.sortOrder === "forward")    {
                 result =  session.get(this.comparatorKey).toLowerCase();
-            }   else if(this.sortOrder == "reverse")    {
+            }   else if(this.sortOrder === "reverse")    {
                 var str = session.get(this.comparatorKey).toLowerCase().split("");
                 str = _.map(str, function(letter) {
                     result =  String.fromCharCode(-(letter.charCodeAt(0)));

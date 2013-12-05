@@ -28,7 +28,7 @@
 
  		this.$el.find("#interviewee_select_button").each(function()	{
  			$(this).click(function()	{
- 				if($(this).attr("class") == "current_interviewee")	{
+ 				if($(this).attr("class") === "current_interviewee")	{
  					app.assessmentView.selectExistingInterviewee($(this).prev("#interviewee_id").val())
  				}
  			});
@@ -48,39 +48,39 @@
 
  		this.$el.find("#first_name").focus(function() {
             var el = $(this);
-            if(el.val() == el.attr('data-default'))    {
+            if(el.val() === el.attr('data-default'))    {
                     $(this).val('');
             }
         });
         this.$el.find("#first_name").blur(function() {
             var el = $(this);
-            if(el.val() == '')  {
+            if(el.val() === '')  {
                 el.val(el.attr('data-default'));
             }
         });
 
         this.$el.find("#last_name").focus(function() {
             var el = $(this);
-            if(el.val() == el.attr('data-default'))    {
+            if(el.val() === el.attr('data-default'))    {
                     $(this).val('');
             }
         });
         this.$el.find("#last_name").blur(function() {
             var el = $(this);
-            if(el.val() == '')  {
+            if(el.val() === '')  {
                 el.val(el.attr('data-default'));
             }
         });
 
         this.$el.find("#job_role").focus(function() {
             var el = $(this);
-            if(el.val() == el.attr('data-default'))    {
+            if(el.val() === el.attr('data-default'))    {
                     $(this).val('');
             }
         });
         this.$el.find("#job_role").blur(function() {
             var el = $(this);
-            if(el.val() == '')  {
+            if(el.val() === '')  {
                 el.val(el.attr('data-default'));
             }
         });

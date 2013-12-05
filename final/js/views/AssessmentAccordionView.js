@@ -57,7 +57,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
             if (app.assessmentView.categories[i].$el.offset().top - assess_table.offset().top < tgt_c) {
                 var acc = this;
                 acc.$el.find('#head').each(function () {
-                    if ($(this).find("#category_id").val() == app.assessmentView.categories[i].model.id) {
+                    if ($(this).find("#category_id").val() === app.assessmentView.categories[i].model.id) {
                         app.assessmentView.currentCategoryObj = app.assessmentView.categories[i];
                         if (acc.openElement != $(this)) {
                             acc.updatingMenu = true;
@@ -82,7 +82,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
                             tgt = alternate;
                         }
                         acc.$el.find('#list_question').each(function () {
-                            if ($(this).find("#question_id").val() == tgt.model.id) {
+                            if ($(this).find("#question_id").val() === tgt.model.id) {
                                 app.assessmentView.currentQuestionObj = tgt;
                                 if (acc.openQuestion != $(this)) {
                                     acc.updatingMenu = true;
@@ -105,11 +105,11 @@ window.AssessmentAccordionView = Backbone.View.extend({
             scroll;
         for (var i = 0; i < app.assessmentView.categories.length; i++) {
             for (var j = 0; j < app.assessmentView.categories[i].questions.length; j++) {
-                if (app.assessmentView.categories[i].questions[j].model.id == id) {
+                if (app.assessmentView.categories[i].questions[j].model.id === id) {
                     if (app.assessmentView.categories[i].questions[j].selectedInterviewee != null) {
                         var iArr = app.currentSession.get("interviewees_list");
                         for (var l = 0; l < iArr.length; l++) {
-                            if (iArr[l].id == parseInt(app.assessmentView.categories[i].questions[j].selectedInterviewee)) {
+                            if (iArr[l].id === parseInt(app.assessmentView.categories[i].questions[j].selectedInterviewee)) {
                                 scroll = assess_main.scrollTop();
                                 app.assessmentView.$el.find("#interviewee_button").html("Interviewee: " + iArr[l].role + " " + iArr[l].fname + " " + iArr[l].lname);
                                 if (isIE9()) {
@@ -157,7 +157,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
 
     setQuestionClass: function (id, len) {
         this.$el.find('#list_question').each(function () {
-            if ($(this).find("#question_id").val() == id) {
+            if ($(this).find("#question_id").val() === id) {
                 if (len > 0) {
                     $(this).css({"color": "#999999"});
                 } else {
@@ -177,7 +177,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
             assess = app.assessmentView,
             assess_main = $("#assessment_main");
         acc.$el.find('#head').each(function (index) {
-            if (index == 0) {
+            if (index === 0) {
                 acc.openElement = $(this);
             }
             $(this).click(function (e) {
@@ -188,11 +188,11 @@ window.AssessmentAccordionView = Backbone.View.extend({
                     assess.openCategory = $(this);
                     app.assessmentList.currentCategory = parseInt($(this).find("#category_id").val());
                     for (var k = 0; k < assess.categories.length; k++) {
-                        if (assess.categories[k].model.id == app.assessmentList.currentCategory) {
+                        if (assess.categories[k].model.id === app.assessmentList.currentCategory) {
                             app.assessmentList.currentQuestion = assess.categories[k].questions[0].model.id;
                         }
                     }
-                    var isSameElement = (acc.openElement == this);
+                    var isSameElement = (acc.openElement === this);
                     if (!acc.updatingMenu) {
                         assess.scrollAssessment("category");
                     } else {
@@ -234,7 +234,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
                     e.preventDefault();
                     e.stopPropagation();
                     if (!assess.assessmentHidden) {
-                        if ($(this).attr("class") == "list_category_inactive") {
+                        if ($(this).attr("class") === "list_category_inactive") {
                             $(this).attr("class", "list_category_hover");
                         }
                     }
@@ -244,7 +244,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
                     e.preventDefault();
                     e.stopPropagation();
                     if (!assess.assessmentHidden) {
-                        if ($(this).attr("class") == "list_category_hover") {
+                        if ($(this).attr("class") === "list_category_hover") {
                             $(this).attr("class", "list_category_inactive");
                         }
                     }
@@ -252,7 +252,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
                 }
             );
             if (lastOpen != null) {
-                if (lastOpen == $(this).next(".categoryListItemContent").find("#category_id").value()) {
+                if (lastOpen === $(this).next(".categoryListItemContent").find("#category_id").value()) {
                     $(this).next(".content").css({"visibility": "visible"});
                     $(this).attr("class", "list_category_active");
                     TweenLite.to($(this).next(".categoryListItemContent"), .3, {css: {height: $(this).next(".categoryListItemContent").find("#category_details").height(), autoAlpha: 1}});
@@ -262,7 +262,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
         });
 
         acc.$el.find('#list_question').each(function (index) {
-            if (index == 0 && assess.openQuestion == null) {
+            if (index === 0 && assess.openQuestion === null) {
                 acc.openQuestion = $(this);
             }
             $(this).click(function (e) {
@@ -279,7 +279,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
                     app.assessmentList.currentCategory = parseInt($(this).find("#category_id").val());
 
                     $("#assessment_nav").find('#head').each(function () {
-                        if (app.assessmentList.currentCategory == parseInt($(this).find("#category_id").val())) {
+                        if (app.assessmentList.currentCategory === parseInt($(this).find("#category_id").val())) {
                             $(this).attr("class", "list_category_active");
                         } else {
                             $(this).attr("class", "list_category_inactive");
@@ -298,10 +298,10 @@ window.AssessmentAccordionView = Backbone.View.extend({
 
                     for (var i = 0; i < app.assessmentView.categories.length; i++) {
                         for (var j = 0; j < app.assessmentView.categories[i].questions.length; j++) {
-                            if (app.assessmentView.categories[i].questions[j].model.id == $(this).find("#question_id").val()) {
+                            if (app.assessmentView.categories[i].questions[j].model.id === $(this).find("#question_id").val()) {
                                 //app.assessmentView.categories[i].questions[j].$el.find("#question_arrow").attr("class", "question_arrow_active");
                                 acc.activeQuestion = assess.categories[i].questions[j];
-                                if (j == 0) {
+                                if (j === 0) {
                                     acc.updatingMenu = true;
                                     $(acc.openElement).click();
                                 }
@@ -321,7 +321,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
                     e.preventDefault();
                     e.stopPropagation();
                     if (!assess.assessmentHidden) {
-                        if ($(this).attr("class") == "list_question_inactive") {
+                        if ($(this).attr("class") === "list_question_inactive") {
                             $(this).attr("class", "list_question_hover");
                         }
                     }
@@ -331,7 +331,7 @@ window.AssessmentAccordionView = Backbone.View.extend({
                     e.preventDefault();
                     e.stopPropagation();
                     if (!assess.assessmentHidden) {
-                        if ($(this).attr("class") == "list_question_hover") {
+                        if ($(this).attr("class") === "list_question_hover") {
                             $(this).attr("class", "list_question_inactive");
                         }
                     }
@@ -340,10 +340,10 @@ window.AssessmentAccordionView = Backbone.View.extend({
             );
         });
         for (var k = 0; k < assess.categories.length; k++) {
-            if (assess.categories[k].model.id == app.assessmentList.currentCategory) {
+            if (assess.categories[k].model.id === app.assessmentList.currentCategory) {
                 app.assessmentList.currentQuestion = assess.categories[k].questions[0].model.id;
                 $("#assessment_nav").find('#list_question').each(function () {
-                    if (parseInt($(this).find("#question_id").val()) == app.assessmentList.currentQuestion) {
+                    if (parseInt($(this).find("#question_id").val()) === app.assessmentList.currentQuestion) {
                         $(this).attr("class", "list_question_active");
                         if (assess.openQuestion != null) {
                             $(assess.openQuestion).attr("class", "list_question_inactive");

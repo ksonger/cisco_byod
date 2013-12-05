@@ -57,7 +57,7 @@ window.SessionEditView = Backbone.View.extend({
                 }
                 var list = app.currentSession.get("interviewees_list");
                 for(var i=0;i<list.length;i++)   {
-                    if(parseInt(list[i].id) == parseInt(app.currentSession.get("main_contact")))    {
+                    if(parseInt(list[i].id) === parseInt(app.currentSession.get("main_contact")))    {
                         list[i].fname = edit.$el.find('#first_name').val();
                         list[i].lname = edit.$el.find('#last_name').val();
                         list[i].role = edit.$el.find('#job_role').val();

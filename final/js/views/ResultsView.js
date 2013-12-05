@@ -41,7 +41,7 @@ window.ResultsView = Backbone.View.extend({
             }
             scr.render().$el.appendTo(this.$el.find("#results_main"));
             this.sections[this.model.attributes.sections[i].id] = scr;
-            if(i == 0)   {
+            if(i === 0)   {
                 scr.showScreen();
                 this.activeScreen = scr;
             }   else    {
@@ -59,12 +59,12 @@ window.ResultsView = Backbone.View.extend({
         var res = this;
 
         this.$el.find('#results_nav_item_div').each(function (index) {
-            if(index == 0)  {
+            if(index === 0)  {
                 res.openElement = $(this);
                 $(this).attr("class", "results_nav_item_active");
             }
             $(this).click(function () {
-                var isSameElement = (res.openElement == this);
+                var isSameElement = (res.openElement === this);
                 if (res.openElement != null) {   
                     if (!isSameElement) {
                         $(res.openElement).attr("class", "results_nav_item_inactive");
@@ -79,12 +79,12 @@ window.ResultsView = Backbone.View.extend({
             });
             $(this).hover(
                 function () {
-                    if ($(this).attr("class") == "results_nav_item_inactive") {
+                    if ($(this).attr("class") === "results_nav_item_inactive") {
                         $(this).attr("class", "results_nav_item_hover");
                     }
                 },
                 function () {
-                    if ($(this).attr("class") == "results_nav_item_hover") {
+                    if ($(this).attr("class") === "results_nav_item_hover") {
                         $(this).attr("class", "results_nav_item_inactive");
                     }
                 }

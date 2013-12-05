@@ -13,11 +13,11 @@ window.ResultsScreenView = Backbone.View.extend({
 
     },
     render:function () {
-        if(this.size == "desktop") {
+        if(this.size === "desktop") {
             this.template = _.template(tpl.get("results_"+(this.model.name.toLowerCase().replace(" ", "_"))));
-        }   else if(this.size == "tablet")  {
+        }   else if(this.size === "tablet")  {
             this.template = _.template(tpl.get("narrow_results_"+(this.model.name.toLowerCase().replace(" ", "_"))));
-        }   else if(this.size == "phone")  {
+        }   else if(this.size === "phone")  {
             this.template = _.template(tpl.get("phone_results_"+(this.model.name.toLowerCase().replace(" ", "_"))));
         }
         $(this.el).attr("class", "results_screen");
@@ -39,20 +39,20 @@ window.ResultsScreenView = Backbone.View.extend({
             screen = this,
             i, j, k, l, pct;
 
-        if(name == "overview")  {
+        if(name === "overview")  {
             var goalstr = null;
             for (i = 0; i < assess.categories.length; i++) {
                 for(j=0;j<assess.categories[i].questions.length;j++)  {
-                    if(assess.categories[i].questions[j].model.id == 9)   {
+                    if(assess.categories[i].questions[j].model.id === 9)   {
                         pct = parseInt(assess.categories[i].questions[j].selectedAnswers[0].score)/6;
                         $(this.el).find(".bar_filled").css({"width":Math.round(pct*100)+"%"});
                         $(this.el).find(".bar_unfilled").css({"width":Math.round(1-(pct*100))+"%"});
                     }
-                    if(assess.categories[i].questions[j].model.id == 7)   {
+                    if(assess.categories[i].questions[j].model.id === 7)   {
                         goalstr = "<ul>";
                         for(k=0;k<assess.categories[i].questions[j].selectedAnswers.length;k++) {
                             for(l=0;l<assess.categories[i].questions[j].model.answers.length;l++) {
-                               if(assess.categories[i].questions[j].model.answers[l].id == parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
+                               if(assess.categories[i].questions[j].model.answers[l].id === parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
                                     goalstr = goalstr + "<li>" + assess.categories[i].questions[j].model.answers[k].text + "</li>"
                                } 
                             }
@@ -72,36 +72,36 @@ window.ResultsScreenView = Backbone.View.extend({
             $(this.el).find('#readiness_chart').gchart({type: 'pie3D', series: data, backgroundColor:"#e9e9ea"});
             var ch_lbl = "<span class='results_screen_chart_label'>" + 65 + "%</span>";
             $(this.el).find('#readiness_chart_label').html(ch_lbl);
-        }   else if(name == "security")  {
+        }   else if(name === "security")  {
             var polstr = null;
 
             for (i = 0; i < assess.categories.length; i++) {
                 for(j=0;j<assess.categories[i].questions.length;j++)  {
-                    if(assess.categories[i].questions[j].model.id == 34)   {
+                    if(assess.categories[i].questions[j].model.id === 34)   {
                         pct = parseInt(assess.categories[i].questions[j].selectedAnswers[0].score)/5;
                         $(this.el).find("#importance_filled").css({"width":Math.round(pct*100)+"%"});
                         $(this.el).find("#importance_unfilled").css({"width":Math.round(1-(pct*100))+"%"});
                     }
-                    if(assess.categories[i].questions[j].model.id == 40)   {
+                    if(assess.categories[i].questions[j].model.id === 40)   {
                         pct = parseInt(assess.categories[i].questions[j].selectedAnswers[0].score)/5;
                         $(this.el).find("#definition_filled").css({"width":Math.round(pct*100)+"%"});
                         $(this.el).find("#definition_unfilled").css({"width":Math.round(1-(pct*100))+"%"});
                     }
-                    if(assess.categories[i].questions[j].model.id == 13)   {
+                    if(assess.categories[i].questions[j].model.id === 13)   {
                         for(k=0;k<assess.categories[i].questions[j].selectedAnswers.length;k++) {
                             for(l=0;l<assess.categories[i].questions[j].model.answers.length;l++) {
-                               if(assess.categories[i].questions[j].model.answers[l].id == parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
+                               if(assess.categories[i].questions[j].model.answers[l].id === parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
                                     polstr = assess.categories[i].questions[j].model.answers[k].text;
                                } 
                             }
                         }
                         $(screen.el).find("#security_policy").html(polstr);
                     }
-                    if(assess.categories[i].questions[j].model.id == 36)   {
+                    if(assess.categories[i].questions[j].model.id === 36)   {
                         var reqstr = "<ul>";
                         for(k=0;k<assess.categories[i].questions[j].selectedAnswers.length;k++) {
                             for(l=0;l<assess.categories[i].questions[j].model.answers.length;l++) {
-                               if(assess.categories[i].questions[j].model.answers[l].id == parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
+                               if(assess.categories[i].questions[j].model.answers[l].id === parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
                                     reqstr = reqstr + "<li>" + assess.categories[i].questions[j].model.answers[k].text + "</li>"
                                } 
                             }
@@ -109,11 +109,11 @@ window.ResultsScreenView = Backbone.View.extend({
                         reqstr = reqstr + "</ul>";
                         $(screen.el).find("#security_requirements").html(reqstr);
                     }
-                    if(assess.categories[i].questions[j].model.id == 37)   {
+                    if(assess.categories[i].questions[j].model.id === 37)   {
                         var constr = "<ul>";
                         for(k=0;k<assess.categories[i].questions[j].selectedAnswers.length;k++) {
                             for(l=0;l<assess.categories[i].questions[j].model.answers.length;l++) {
-                               if(assess.categories[i].questions[j].model.answers[l].id == parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
+                               if(assess.categories[i].questions[j].model.answers[l].id === parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
                                     constr = constr + "<li>" + assess.categories[i].questions[j].model.answers[k].text + "</li>"
                                } 
                             }
@@ -123,31 +123,31 @@ window.ResultsScreenView = Backbone.View.extend({
                     }
                 }
             }
-        }   else if(name == "opportunities")  {
+        }   else if(name === "opportunities")  {
             var feedbacks = [];
             for (i = 0; i < assess.categories.length; i++) {
                 for(j=0;j<assess.categories[i].questions.length;j++)  {
                     for(k=0;k<assess.categories[i].questions[j].selectedAnswers.length;k++) {
                         for(l=0;l<assess.categories[i].questions[j].model.answers.length;l++) {
-                            if(assess.categories[i].questions[j].model.answers[l].id == parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
+                            if(assess.categories[i].questions[j].model.answers[l].id === parseInt(assess.categories[i].questions[j].selectedAnswers[k].id.replace("answer_", "")))   {
                                 for(var m=0;m<app.resultsView.model.attributes.feedback.length;m++)    {
-                                    if(parseInt(assess.categories[i].questions[j].model.answers[l].feedback) == parseInt(app.resultsView.model.attributes.feedback[m].id)) {
+                                    if(parseInt(assess.categories[i].questions[j].model.answers[l].feedback) === parseInt(app.resultsView.model.attributes.feedback[m].id)) {
                                         var dupe = false;
                                         for(var n=0;n<feedbacks.length;n++) {
-                                            if(feedbacks[n] == parseInt(app.resultsView.model.attributes.feedback[m].id))    {
+                                            if(feedbacks[n] === parseInt(app.resultsView.model.attributes.feedback[m].id))    {
                                                 dupe = true;
                                                 break;
                                             }
                                         }
                                         if(!dupe)   {
                                             feedbacks.push(parseInt(app.resultsView.model.attributes.feedback[m].id));
-                                            if(app.resultsView.model.attributes.feedback[m].category == "byod") {
+                                            if(app.resultsView.model.attributes.feedback[m].category === "byod") {
                                                 $(screen.el).find("#byod_feedback").append(app.resultsView.model.attributes.feedback[m].text + "<br /><br />");
-                                            }   else if(app.resultsView.model.attributes.feedback[m].category == "vxi") {
+                                            }   else if(app.resultsView.model.attributes.feedback[m].category === "vxi") {
                                                 $(screen.el).find("#bvxi_feedback").append(app.resultsView.model.attributes.feedback[m].text + "<br /><br />");
-                                            }   else if(app.resultsView.model.attributes.feedback[m].category == "other") {
+                                            }   else if(app.resultsView.model.attributes.feedback[m].category === "other") {
                                                 $(screen.el).find("#other_feedback").append(app.resultsView.model.attributes.feedback[m].text + "<br /><br />");
-                                            }   else if(app.resultsView.model.attributes.feedback[m].category == "vertical") {
+                                            }   else if(app.resultsView.model.attributes.feedback[m].category === "vertical") {
                                                 $(screen.el).find("#vertical_feedback").append(app.resultsView.model.attributes.feedback[m].text + "<br /><br />");
                                             }
                                         }
@@ -159,16 +159,16 @@ window.ResultsScreenView = Backbone.View.extend({
                 }
             }
             var unanswered = "No questions have been answered related to this category.";
-            if($(screen.el).find("#byod_feedback").html() == '')    {
+            if($(screen.el).find("#byod_feedback").html() === '')    {
                 $(screen.el).find("#byod_feedback").html(unanswered)
             }
-            if($(screen.el).find("#vxi_feedback").html() == '')    {
+            if($(screen.el).find("#vxi_feedback").html() === '')    {
                 $(screen.el).find("#vxi_feedback").html(unanswered)
             }
-            if($(screen.el).find("#other_feedback").html() == '')    {
+            if($(screen.el).find("#other_feedback").html() === '')    {
                 $(screen.el).find("#other_feedback").html(unanswered)
             }
-            if($(screen.el).find("#vertical_feedback").html() == '')    {
+            if($(screen.el).find("#vertical_feedback").html() === '')    {
                 $(screen.el).find("#vertical_feedback").html(unanswered)
             }
         }

@@ -58,7 +58,7 @@ window.SessionsView = Backbone.View.extend({
 
         this.closedSessions.$el.css({"visibility":"hidden"});
 
-        if(this.activeList == null) {
+        if(this.activeList === null) {
             this.activeList = this.openSessions;
         }
         var sess = this;
@@ -135,11 +135,11 @@ window.SessionsView = Backbone.View.extend({
         sess.$el.each(function () {
             $(this).find('.company_sort').click(function (e) {
                 e.preventDefault();
-                if(app.sessionList.comparatorKey == "company")  {
-                    if(app.sessionList.sortOrder == "forward")  {
+                if(app.sessionList.comparatorKey === "company")  {
+                    if(app.sessionList.sortOrder === "forward")  {
                         app.sessionList.sortOrder = "reverse";
                     }
-                    else if(app.sessionList.sortOrder == "reverse")  {
+                    else if(app.sessionList.sortOrder === "reverse")  {
                         app.sessionList.sortOrder = "forward";
                     }
                 }   else    {
@@ -151,11 +151,11 @@ window.SessionsView = Backbone.View.extend({
             });
             $(this).find('.contact_sort').click(function (e) {
                 e.preventDefault();
-                if(app.sessionList.comparatorKey == "main_contact_fname")  {
-                    if(app.sessionList.sortOrder == "forward")  {
+                if(app.sessionList.comparatorKey === "main_contact_fname")  {
+                    if(app.sessionList.sortOrder === "forward")  {
                         app.sessionList.sortOrder = "reverse";
                     }
-                    else if(app.sessionList.sortOrder == "reverse")  {
+                    else if(app.sessionList.sortOrder === "reverse")  {
                         app.sessionList.sortOrder = "forward";
                     }
                 }   else    {
@@ -167,11 +167,11 @@ window.SessionsView = Backbone.View.extend({
             });
             $(this).find('.date_sort').click(function (e) {
                 e.preventDefault();
-                if(app.sessionList.comparatorKey == "modified")  {
-                    if(app.sessionList.sortOrder == "forward")  {
+                if(app.sessionList.comparatorKey === "modified")  {
+                    if(app.sessionList.sortOrder === "forward")  {
                         app.sessionList.sortOrder = "reverse";
                     }
-                    else if(app.sessionList.sortOrder == "reverse")  {
+                    else if(app.sessionList.sortOrder === "reverse")  {
                         app.sessionList.sortOrder = "forward";
                     }
                 }   else    {

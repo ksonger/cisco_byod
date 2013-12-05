@@ -42,24 +42,24 @@ window.AssessmentView = Backbone.View.extend({
             assess_table = $("#assessment_table"),
             adj = assess_table.height() * .1;
 
-        if (typ == "category") {
+        if (typ === "category") {
             element = this.openCategory.find("#category_id").val();
         }
-        if (typ == "question") {
+        if (typ === "question") {
             element = this.openQuestion.find("#question_id").val();
         }
 
         for (var i = 0; i < this.categories.length; i++) {
-            if (typ == "category" && this.categories[i].model.id == element) {
+            if (typ === "category" && this.categories[i].model.id === element) {
                 try {
 
                     this.mainScroll.scrollTo(this.categories[i].$el.offset().top - adj + this.mainScroll.nativeScroll.scrollTop() - assess_table.offset().top);
                 } catch (e) {
 
                 }
-            } else if (typ == "question") {
+            } else if (typ === "question") {
                 for (var j = 0; j < this.categories[i].questions.length; j++) {
-                    if (this.categories[i].questions[j].model.id == element) {
+                    if (this.categories[i].questions[j].model.id === element) {
                         try {
                             this.mainScroll.scrollTo(this.categories[i].questions[j].$el.offset().top - adj + this.mainScroll.nativeScroll.scrollTop() - assess_table.offset().top);
                         } catch (e) {
@@ -135,7 +135,7 @@ window.AssessmentView = Backbone.View.extend({
     },
 
     addScrolling: function () {
-        if (this.mainScroll == null) {
+        if (this.mainScroll === null) {
             this.mainScroll = new ScrollbarView({
                 target: "#assessment_main",
                 container: "#assessment_table",
@@ -388,7 +388,7 @@ window.AssessmentView = Backbone.View.extend({
         if (this.currentQuestionObj.selectedInterviewee != null) {
             var answered_by = this.currentQuestionObj.selectedInterviewee;
             this.$el.find("#interviewees_table").find("#interviewee_id").each(function () {
-                if ($(this).val() == answered_by) {
+                if ($(this).val() === answered_by) {
                     $(this).next("button").attr("class", "current_interviewee_selected");
                 } else {
                     $(this).next("button").attr("class", "current_interviewee");
@@ -424,7 +424,7 @@ window.AssessmentView = Backbone.View.extend({
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
 
-                    if (key == 'id') {
+                    if (key === 'id') {
                         sess_interviewees = sess_interviewees + "," + String(obj[key]);
                         app.currentSession.set("interviewees", sess_interviewees);
                         app.currentSession.save(null, {success: function () {

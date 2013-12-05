@@ -23,7 +23,7 @@ window.CategoryView = Backbone.View.extend({
         this.$el.css({"align":"center", "text-align":"center", "padding-left":"60px", "padding-right":"40px"});
         this.$el.html(this.template(this.model));
         for(var i = 0;i<this.model.questions.length;i++)   {
-            if(this.model.questions[i].category == this.model.id)   {
+            if(this.model.questions[i].category === this.model.id)   {
                 var ques = new QuestionView({model:this.model.questions[i]});
                 ques.render().$el.appendTo(this.$el.find(".category"));
                 var ntxt = i+1 + ") ";
